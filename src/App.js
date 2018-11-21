@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component, setGlobal} from 'reactn';
 import './App.css';
+import LoginContainer from "./containers/login/LoginContainer";
+import LanguageService from "./services/LanguageService";
+import ChangeLanguage from "./containers/components/ChangeLanguage";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor(){
+        super();
+        console.log(window.navigator.language);
+        LanguageService.init(setGlobal);
+    }
+    render() {
+
+        console.log(this.global);
+        return (
+            <div className="App">
+                <ChangeLanguage/>
+                <LoginContainer/>
+            </div>
+        );
+    }
 }
 
 export default App;
