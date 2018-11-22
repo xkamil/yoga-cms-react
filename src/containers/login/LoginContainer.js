@@ -1,24 +1,24 @@
-import React, {Component} from 'react';
+import React, {Component} from 'reactn';
 import {Grid} from '@material-ui/core';
-
-import LoginView from "./LoginView";
+import LoginForm from "./LoginForm";
+import YogaApiService from "../../services/YogaApiService";
 
 class LoginContainer extends Component {
 
-    onLogin = (username, password) => {
-        console.log(username, password)
+    onLogin = (user, password) => {
+        YogaApiService.authenticate(user, password)
+            .catch(()=>console.log('authentication failed'));
     };
-
+    
     render() {
         return (
             <Grid
                 container
-                style={{minHeight: '80vh'}}
+                style={{minHeight: '80vh', textAlign: 'center'}}
                 direction="row"
                 justify="center"
-                alignItems="center"><LoginView onLogin={this.onLogin}/>
+                alignItems="center"><LoginForm onLogin={this.onLogin}/>
             </Grid>
-
         );
     }
 }

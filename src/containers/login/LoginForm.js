@@ -5,14 +5,13 @@ class LoginView extends Component {
 
     constructor(){
         super();
-
-        this.username = React.createRef();
-        this.password = React.createRef();
+        this.usernameField = React.createRef();
+        this.passwordField = React.createRef();
     }
 
     onLogin = () =>{
-       const username = this.username.current.value;
-       const password = this.password.current.value;
+       const username = this.usernameField.current.value;
+       const password = this.passwordField.current.value;
        this.props.onLogin(username, password);
     };
 
@@ -22,10 +21,10 @@ class LoginView extends Component {
         return (
             <Grid container spacing={8}>
                 <Grid item xs={12}>
-                    <TextField inputRef={this.username} label={lang.username}/>
+                    <TextField inputRef={this.usernameField} label={lang.usernameField}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField type="password" inputRef={this.password} label={lang.password}/>
+                    <TextField type="password" inputRef={this.passwordField} label={lang.passwordField}/>
                 </Grid>
                 <Grid item xs={12}>
                     <Button onClick={this.onLogin}>{lang.login}</Button>

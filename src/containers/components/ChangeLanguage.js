@@ -4,10 +4,6 @@ import {List, ListItemText} from '@material-ui/core';
 
 class ChangeLanguage extends Component {
 
-    constructor() {
-        super();
-    }
-
     changeLanguage = (lang) => {
         LanguageService.setLanguage(lang);
     };
@@ -15,11 +11,12 @@ class ChangeLanguage extends Component {
     render() {
         const languages = LanguageService.getLanguages();
 
-
         return (
             <List>
-                {languages.map((lang, key) => <ListItemText key={key}
-                                                            onClick={() => this.changeLanguage(lang)}>{lang}</ListItemText>)}
+                {languages.map((lang, key) =>
+                    <ListItemText key={key}
+                                  onClick={() => this.changeLanguage(lang)}>{lang}</ListItemText>
+                )}
             </List>
         );
     }

@@ -1,21 +1,21 @@
 import Language from '../lang/Language'
+import StateService from "./StateService";
 
 class LanguageService  {
 
-    static init(fnSetGlobal) {
-        this.setGlobal = fnSetGlobal;
+    static init() {
         const lang = localStorage.getItem("lang");
 
         if(!Language[lang]){
-            this.setGlobal({lang: Language.default})
+            StateService.setLanguage(Language.default);
         }else{
-            this.setGlobal({lang: Language[lang]})
+            StateService.setLanguage(Language[lang]);
         }
     };
 
     static setLanguage(lang){
         if(Language[lang]){
-            this.setGlobal({lang: Language[lang]});
+            StateService.setLanguage(Language[lang]);
             localStorage.setItem("lang", lang);
         }
     };
