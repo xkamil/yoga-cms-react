@@ -1,4 +1,4 @@
-import React, {Component} from 'reactn';
+import React, {Component} from 'react';
 import {Grid} from '@material-ui/core';
 import LoginForm from "./LoginForm";
 import YogaApiService from "../../services/YogaApiService";

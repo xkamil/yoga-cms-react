@@ -1,13 +1,10 @@
-import React, {Component} from 'reactn';
+import React, {Component} from 'react';
 import {Button, Grid, TextField} from '@material-ui/core';
+import { connect } from 'react-redux'
 
 class LoginView extends Component {
-
-    constructor(){
-        super();
-        this.usernameField = React.createRef();
-        this.passwordField = React.createRef();
-    }
+    usernameField = React.createRef();
+    passwordField = React.createRef();
 
     onLogin = () =>{
        const username = this.usernameField.current.value;
@@ -16,15 +13,15 @@ class LoginView extends Component {
     };
 
     render() {
-        const {lang} = this.global;
+        const {lang} = this.props;
 
         return (
             <Grid container spacing={8}>
                 <Grid item xs={12}>
-                    <TextField inputRef={this.usernameField} label={lang.usernameField}/>
+                    <TextField inputRef={this.usernameField} label={lang.username}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField type="password" inputRef={this.passwordField} label={lang.passwordField}/>
+                    <TextField type="password" inputRef={this.passwordField} label={lang.password}/>
                 </Grid>
                 <Grid item xs={12}>
                     <Button onClick={this.onLogin}>{lang.login}</Button>
@@ -34,4 +31,9 @@ class LoginView extends Component {
     }
 }
 
-export default LoginView;
+const mapStateToProps = state => ({
+  lang: state.config.lang,
+    state
+});
+
+export default connect(mapStateToProps)(LoginView);

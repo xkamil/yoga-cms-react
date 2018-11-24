@@ -1,5 +1,5 @@
 {
-  "usernameField":"username",
-  "passwordField":"password",
+  "username":"Username",
+  "password":"Password",
   "login":"Login"
 }

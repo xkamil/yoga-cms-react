@@ -1,4 +1,4 @@
-import React, {Component} from 'reactn';
+import React, {Component} from 'react';
 import LanguageService from "../../services/LanguageService";
 import {List, ListItemText} from '@material-ui/core';
 

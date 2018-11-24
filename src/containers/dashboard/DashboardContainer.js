@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
 import {Grid, Button} from '@material-ui/core';
-import StateService from "../../services/StateService";
 import TokenService from "../../services/TokenService";
 import YogaApiService from "../../services/YogaApiService";
+import Store from '../../redux/Store';
+import {logout} from '../../redux/actions/authActions';
 
 class DashboardContainer extends Component {
 
     onLogOut = () => {
-        StateService.setUser(null);
+        Store.dispatch(logout());
         TokenService.clearToken();
     };
 
-    onInvalidateToken = () =>{
+    onInvalidateToken = () => {
         TokenService.saveToken("dupa_zly_token");
     };
 
-    onLogsRequest = () =>{
+    onLogsRequest = () => {
         YogaApiService.getLogs()
-            .catch(()=>console.log('blad autoryzacji'))
+            .catch(() => console.log('blad autoryzacji'))
     };
 
     render() {
@@ -33,7 +34,6 @@ class DashboardContainer extends Component {
                 <Button onClick={this.onLogOut}>Wyloguj</Button>
                 <Button onClick={this.onInvalidateToken}>Unieważnij token</Button>
                 <Button onClick={this.onLogsRequest}>Request z tokenem</Button>
-
             </Grid>
 
         );

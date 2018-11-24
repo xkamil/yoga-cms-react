@@ -1,6 +1,7 @@
 import Request from "./Request";
 import TokenService from "./TokenService";
-import StateService from "./StateService";
+import Store from '../redux/Store';
+import {login, logout} from '../redux/actions/authActions';
 
 class YogaApiService {
     static url = 'https://yoga-server.herokuapp.com';
@@ -16,12 +17,12 @@ class YogaApiService {
                 .perform()
                 .then(res => {
                     TokenService.saveToken(res.data);
-                    StateService.setUser(user);
+                    Store.dispatch(login(user));
                     resolve();
                 })
                 .catch(err => {
                     TokenService.clearToken();
-                    StateService.setUser(null);
+                    Store.dispatch(logout());
                     reject();
                 })
         })
@@ -53,11 +54,9 @@ class YogaApiService {
 
     static catchError(error, reject) {
         if (error.response.status === 401) {
-            StateService.setUser(null);
+            Store.dispatch(logout());
             TokenService.clearToken();
         }
-
-        console.log(reject);
         
         reject();
     }

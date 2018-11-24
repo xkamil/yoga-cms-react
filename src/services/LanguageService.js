@@ -1,26 +1,23 @@
 import Language from '../lang/Language'
-import StateService from "./StateService";
+import {changeLanguage} from "../redux/actions/configActions";
+import Store from '../redux/Store';
 
-class LanguageService  {
+class LanguageService {
 
     static init() {
-        const lang = localStorage.getItem("lang");
-
-        if(!Language[lang]){
-            StateService.setLanguage(Language.default);
-        }else{
-            StateService.setLanguage(Language[lang]);
-        }
+        const savedLang = localStorage.getItem("lang");
+        const lang = Language[savedLang] ? Language[savedLang] : Language.default;
+        Store.dispatch(changeLanguage(lang));
     };
 
-    static setLanguage(lang){
-        if(Language[lang]){
-            StateService.setLanguage(Language[lang]);
+    static setLanguage(lang) {
+        if (Language[lang]) {
+            Store.dispatch(changeLanguage(Language[lang]));
             localStorage.setItem("lang", lang);
         }
     };
 
-    static getLanguages(){
+    static getLanguages() {
         let languages = Object.keys(Language);
 
         const index = languages.indexOf("default");

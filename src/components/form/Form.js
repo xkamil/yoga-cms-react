@@ -1,4 +1,4 @@
-import React, {Component} from 'reactn';
+import React, {Component} from 'react';
 import FieldBuilder from './FieldBuilder';
 
 class Form extends Component {

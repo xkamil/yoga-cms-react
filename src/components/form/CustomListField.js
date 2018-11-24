@@ -1,4 +1,4 @@
-import React, {Component} from 'reactn';
+import React, {Component} from 'react';
 import {List, ListItem, ListItemIcon, TextField} from '@material-ui/core';
 import Remove from '@material-ui/icons/RemoveCircle';
 import AddIcon from '@material-ui/icons/AddCircle';

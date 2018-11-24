@@ -1,4 +1,4 @@
-import React from 'reactn';
+import React from 'react';
 import CustomTextField from "./CustomTextField";
 import CustomListField from "./CustomListField";
 
