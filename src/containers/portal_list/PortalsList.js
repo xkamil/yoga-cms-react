@@ -25,8 +25,8 @@ class PortalsList extends Component {
                         <TableCell>{lang.id}</TableCell>
                         <TableCell>{lang.name}</TableCell>
                         <TableCell>{lang.label}</TableCell>
-                        <TableCell>{lang.active}</TableCell>
                         <TableCell>{lang.description}</TableCell>
+                        <TableCell>{lang.active}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

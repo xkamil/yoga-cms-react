@@ -11,5 +11,7 @@
   "label":"Label",
   "active":"Active",
   "description":"description",
-  "save":"Save"
+  "save":"Save",
+  "cancel":"Cancel",
+  "cancel_changes":"Cancel changes"
 }

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './App.css';
 import LoginContainer from "./containers/login/LoginContainer";
 import ChangeLanguage from "./containers/components/ChangeLanguage";
 import LanguageService from "./services/LanguageService";

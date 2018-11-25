@@ -28,7 +28,7 @@ class PortalContainer extends Component {
         const {portal} = this.state;
 
         return (
-            <Grid container item>
+            <Grid container item spacing={8}>
                 <PortalView portal={portal} />
             </Grid>
         );

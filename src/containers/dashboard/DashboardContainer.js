@@ -12,12 +12,20 @@ class DashboardContainer extends Component {
         return (
             <Grid container direction="row">
                 <UserMenu/>
-                <MainMenu/>
 
-                <Switch>
-                    <Route exact path='/portals' component={PortalsListContainer}/>
-                    <Route path='/portals/:portal_id' component={PortalContainer}/>
-                </Switch>
+
+                <Grid container item xs={2}>
+                    <MainMenu/>
+                </Grid>
+
+                <Grid container item xs>
+                    <Switch>
+                        <Route exact path='/portals' component={PortalsListContainer}/>
+                        <Route path='/portals/:portal_id' component={PortalContainer}/>
+                    </Switch>
+                </Grid>
+
+
             </Grid>
         );
     }

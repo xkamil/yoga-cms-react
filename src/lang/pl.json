@@ -11,5 +11,7 @@
   "label":"Etykieta",
   "active":"Aktywny",
   "description":"Opis",
-  "save":"Zapisz"
+  "save":"Zapisz",
+  "cancel":"Anuluj",
+  "cancel_changes":"Anuluj zmiany"
 }

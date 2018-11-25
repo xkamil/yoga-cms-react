@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {FormHelperText, Button, Grid, Switch, TextField} from '@material-ui/core';
-import {connect} from 'react-redux'
-import Debug from "../components/Debug";
+import {Button, Grid} from '@material-ui/core';
+import {connect} from 'react-redux';
+import {ArrowDownward, ArrowUpward} from '@material-ui/icons';
 
 class PortalSectionsView extends Component {
 
@@ -16,7 +16,7 @@ class PortalSectionsView extends Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.sections) {
             return {
-                sectionIds: nextProps.sections.map(s=>s._id)
+                sectionIds: nextProps.sections.map(s => s._id)
             };
         }
         return null;
@@ -26,16 +26,27 @@ class PortalSectionsView extends Component {
         const {lang, onSectionOrderChanged} = this.props;
         const sections = this.props.sections || [];
 
-        const sectionRow = (section, key)=><Grid key={key} container item xs={12} direction='row'>
+        const sectionRow = (section, key) => <Grid key={key} item container direction='row' spacing={8}>
+
+            <Grid item>
+                <Button size='small' variant='outlined'>
+                    <ArrowDownward onClick={() => onSectionOrderChanged(section._id, 1)}/>
+                </Button>
+            </Grid>
+            <Grid item>
+                <Button size='small' variant='outlined'>
+                    <ArrowUpward onClick={() => onSectionOrderChanged(section._id, -1)}/>
+                </Button>
+            </Grid>
+
+
             <Grid item>{section.name}</Grid>
-            <Grid item><Button onClick={()=>onSectionOrderChanged(section._id, 1)}>UP</Button></Grid>
-            <Grid item><Button onClick={()=>onSectionOrderChanged(section._id, -1)}>DOWN</Button></Grid>
         </Grid>;
 
         return (
-            <Grid>
+            <React.Fragment>
                 {sections && sections.map(sectionRow)}
-            </Grid>
+            </React.Fragment>
         );
     }
 }

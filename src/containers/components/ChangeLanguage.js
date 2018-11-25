@@ -33,7 +33,7 @@ class ChangeLanguage extends Component {
 
         return (
             <React.Fragment>
-                <List style={{cursor: 'pointer', position: 'absolute', top: 0, left: 10}}>
+                <List style={{cursor: 'pointer', position: 'absolute', top: 10, right: 10}}>
                     <ListItemText onClick={() => this.handleClick()}>{lang.lang}</ListItemText>
 
                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>

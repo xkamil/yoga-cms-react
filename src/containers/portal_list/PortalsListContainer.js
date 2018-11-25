@@ -29,15 +29,13 @@ class PortalsListContainer extends Component {
         const {portals} = this.state;
 
         return (
-            <Grid
-                container
-                item
-                direction="row"
-                justify="center"
-                alignItems="center">
-                <h1>Portals list</h1>
-
-                <PortalsList portals={portals}/>
+            <Grid container direction='column'>
+                <Grid item>
+                    <h1>Portals list</h1>
+                </Grid>
+                <Grid item>
+                    <PortalsList portals={portals}/>
+                </Grid>
             </Grid>
         );
     }

@@ -13,7 +13,7 @@ class UserMenu extends Component {
         const {lang} = this.props;
 
         return (
-            <div style={{position: 'absolute', right: 10, top: 10}}>
+            <div style={{position: 'absolute', right: 70, top: 10}}>
                 <Button onClick={this.onLogOut}>{lang.logout}</Button>
             </div>
         );
