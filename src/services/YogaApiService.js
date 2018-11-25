@@ -1,9 +1,8 @@
 import Request from "./Request";
-import TokenService from "./TokenService";
-import Store from '../redux/Store';
-import {login, logout} from '../redux/actions/authActions';
+import AuthService from "./AuthService";
 
 class YogaApiService {
+
     static url = 'https://yoga-server.herokuapp.com';
 
     static authenticate(user, password) {
@@ -15,16 +14,8 @@ class YogaApiService {
                 .withMethod('post')
                 .withData(credentials)
                 .perform()
-                .then(res => {
-                    TokenService.saveToken(res.data);
-                    Store.dispatch(login(user));
-                    resolve();
-                })
-                .catch(err => {
-                    TokenService.clearToken();
-                    Store.dispatch(logout());
-                    reject();
-                })
+                .then(res => resolve(res.data))
+                .catch(err => reject(err))
         })
     }
 
@@ -35,7 +26,18 @@ class YogaApiService {
             new Request(this.url + path).withMethod('get')
                 .perform()
                 .then(res => resolve(res.data))
-                .catch(err => reject())
+                .catch(err => reject(err))
+        })
+    }
+
+    static getPortal(id) {
+        const path = `/api/portals/${id}`;
+
+        return new Promise((resolve, reject) => {
+            new Request(this.url + path).withMethod('get')
+                .perform()
+                .then(res => resolve(res.data))
+                .catch(err => reject(err))
         })
     }
 
@@ -54,8 +56,7 @@ class YogaApiService {
 
     static catchError(error, reject) {
         if (error.response.status === 401) {
-            Store.dispatch(logout());
-            TokenService.clearToken();
+            AuthService.logout();
         }
         
         reject();

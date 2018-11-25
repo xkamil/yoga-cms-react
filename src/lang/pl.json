@@ -1,5 +1,15 @@
 {
+  "lang":"PL",
   "username":"Nazwa użytkownika",
   "password":"Hasło",
-  "login":"Zaloguj"
+  "login":"Zaloguj",
+  "portal_list":"Lista portali",
+  "logout":"Wyloguj",
+  "options":"Opcje",
+  "id":"Id",
+  "name":"Nazwa",
+  "label":"Etykieta",
+  "active":"Aktywny",
+  "description":"Opis",
+  "save":"Zapisz"
 }

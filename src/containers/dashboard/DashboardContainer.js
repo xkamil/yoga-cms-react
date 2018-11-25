@@ -1,41 +1,24 @@
 import React, {Component} from 'react';
-import {Grid, Button} from '@material-ui/core';
-import TokenService from "../../services/TokenService";
-import YogaApiService from "../../services/YogaApiService";
-import Store from '../../redux/Store';
-import {logout} from '../../redux/actions/authActions';
+import {Grid} from '@material-ui/core';
+import {Route, Switch} from "react-router-dom";
+import PortalsListContainer from "../portal_list/PortalsListContainer";
+import PortalContainer from "../portal/PortalContainer";
+import UserMenu from '../components/UserMenu';
+import MainMenu from "../components/MainMenu";
 
 class DashboardContainer extends Component {
 
-    onLogOut = () => {
-        Store.dispatch(logout());
-        TokenService.clearToken();
-    };
-
-    onInvalidateToken = () => {
-        TokenService.saveToken("dupa_zly_token");
-    };
-
-    onLogsRequest = () => {
-        YogaApiService.getLogs()
-            .catch(() => console.log('blad autoryzacji'))
-    };
-
     render() {
         return (
-            <Grid
-                container
-                style={{minHeight: '80vh'}}
-                direction="row"
-                justify="center"
-                alignItems="center">
+            <Grid container direction="row">
+                <UserMenu/>
+                <MainMenu/>
 
-                <h1>jupi</h1>
-                <Button onClick={this.onLogOut}>Wyloguj</Button>
-                <Button onClick={this.onInvalidateToken}>Unieważnij token</Button>
-                <Button onClick={this.onLogsRequest}>Request z tokenem</Button>
+                <Switch>
+                    <Route exact path='/portals' component={PortalsListContainer}/>
+                    <Route path='/portals/:portal_id' component={PortalContainer}/>
+                </Switch>
             </Grid>
-
         );
     }
 }

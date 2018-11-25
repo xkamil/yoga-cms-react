@@ -1,5 +1,15 @@
 {
+  "lang":"ENG",
   "username":"Username",
   "password":"Password",
-  "login":"Login"
+  "login":"Login",
+  "logout":"Logout",
+  "portal_list":"List of portals",
+  "options":"Options",
+  "id":"Id",
+  "name":"Name",
+  "label":"Label",
+  "active":"Active",
+  "description":"description",
+  "save":"Save"
 }
