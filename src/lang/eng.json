@@ -13,5 +13,6 @@
   "description":"description",
   "save":"Save",
   "cancel":"Cancel",
-  "cancel_changes":"Cancel changes"
+  "cancel_changes":"Cancel changes",
+  "undo_changes":"Undo changes"
 }

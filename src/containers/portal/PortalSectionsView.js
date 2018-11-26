@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Button, Grid} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {ArrowDownward, ArrowUpward} from '@material-ui/icons';
+import {Link} from "react-router-dom";
+import {PageviewOutlined} from '@material-ui/icons';
 
 class PortalSectionsView extends Component {
 
@@ -26,19 +28,26 @@ class PortalSectionsView extends Component {
         const {lang, onSectionOrderChanged} = this.props;
         const sections = this.props.sections || [];
 
+
         const sectionRow = (section, key) => <Grid key={key} item container direction='row' spacing={8}>
 
             <Grid item>
                 <Button size='small' variant='outlined'>
-                    <ArrowDownward onClick={() => onSectionOrderChanged(section._id, 1)}/>
-                </Button>
-            </Grid>
-            <Grid item>
-                <Button size='small' variant='outlined'>
-                    <ArrowUpward onClick={() => onSectionOrderChanged(section._id, -1)}/>
+                    <ArrowDownward onClick={() => onSectionOrderChanged(key, 1)}/>
                 </Button>
             </Grid>
 
+            <Grid item>
+                <Button size='small' variant='outlined'>
+                    <ArrowUpward onClick={() => onSectionOrderChanged(key,-1)}/>
+                </Button>
+            </Grid>
+
+            <Grid>
+                <Link to={'/sections/' + section._id}>
+                    <PageviewOutlined/>
+                </Link>
+            </Grid>
 
             <Grid item>{section.name}</Grid>
         </Grid>;

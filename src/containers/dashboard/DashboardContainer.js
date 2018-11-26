@@ -5,6 +5,7 @@ import PortalsListContainer from "../portal_list/PortalsListContainer";
 import PortalContainer from "../portal/PortalContainer";
 import UserMenu from '../components/UserMenu';
 import MainMenu from "../components/MainMenu";
+import SectionContainer from "../section/SectionContainer";
 
 class DashboardContainer extends Component {
 
@@ -22,6 +23,7 @@ class DashboardContainer extends Component {
                     <Switch>
                         <Route exact path='/portals' component={PortalsListContainer}/>
                         <Route path='/portals/:portal_id' component={PortalContainer}/>
+                        <Route path='/sections/:section_id' component={SectionContainer}/>
                     </Switch>
                 </Grid>
 

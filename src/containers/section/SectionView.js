@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, FormControlLabel, FormHelperText, Grid, Switch, TextField} from '@material-ui/core';
 import {connect} from 'react-redux'
-import PortalSectionsView from './PortalSectionsView';
+import SectionContentItemsView from './SectionContentItemsView';
 
 class PortalView extends Component {
 
@@ -9,62 +9,62 @@ class PortalView extends Component {
         super();
 
         this.state = {
-            portal: null
+            section: null
         }
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (prevState.portal === null) {
-            return {portal: nextProps.portal};
+        if (prevState.section === null) {
+            return {section: nextProps.section};
         }
         return null;
     }
 
-    updatePortal = () => {
-        const sections = this.state.portal.sections.map(s => s._id);
-        const portal = {...this.state.portal, sections};
-        console.log('SENDING', portal);
+    updateSection = () => {
+        const data = this.state.section.data.map(i => i._id);
+        const section = {...this.state.section, data};
+        console.log('SENDING', section);
     };
 
     resetChanges = () => {
-        this.setState({portal: this.props.portal});
+        this.setState({section: this.props.section});
     };
 
-    isPortalChanged = () => {
-        const original = JSON.stringify(this.props.portal);
-        const current = JSON.stringify(this.state.portal);
-        if (this.props.portal) {
+    isSectionChanged = () => {
+        const original = JSON.stringify(this.props.section);
+        const current = JSON.stringify(this.state.section);
+        if (this.props.section) {
             return original === current;
         }
         return false;
     };
 
     onChange = (id, value) => {
-        const portal = {...this.state.portal};
-        portal[id] = value;
-        this.setState({portal});
+        const section = {...this.state.section};
+        section[id] = value;
+        this.setState({section});
     };
 
-    onSectionOrderChanged = (currentIndex, mod) => {
-        const newSections = JSON.parse(JSON.stringify( this.state.portal.sections));
+    onContentItemOrderChanged = (currentIndex, mod) => {
+        const newContentItems = JSON.parse(JSON.stringify( this.state.section.data));
         const newIndex = currentIndex + mod;
         
-        if(newIndex >= 0 && newIndex < newSections.length){
-            const tmp = newSections[newIndex];
-            newSections[newIndex] = newSections[currentIndex];
-            newSections[currentIndex] = tmp;
-            const portal = {...this.state.portal, sections: newSections};
-            this.setState({portal})
+        if(newIndex >= 0 && newIndex < newContentItems.length){
+            const tmp = newContentItems[newIndex];
+            newContentItems[newIndex] = newContentItems[currentIndex];
+            newContentItems[currentIndex] = tmp;
+            const section = {...this.state.section, data: newContentItems};
+            this.setState({section})
         }
     };
 
     render() {
         const {lang} = this.props;
-        const portal = this.state.portal || {};
+        const section = this.state.section || {};
 
         const textInput = (id, value, disabled) => <TextField id={id}
                                                               fullWidth={true}
-                                                              value={portal[value] || ''}
+                                                              value={section[value] || ''}
                                                               label={lang[id]}
                                                               onChange={i => this.onChange(i.target.id, i.target.value)}
                                                               disabled={disabled}/>;
@@ -72,18 +72,18 @@ class PortalView extends Component {
         return (
             <Grid container spacing={16} direction='row' alignItems="flex-start">
                 <Grid item xs={12}>
-                    <h1>Portal</h1>
+                    <h1>Section</h1>
                     <hr/>
                 </Grid>
 
                 <Grid item container xs={12} spacing={8} direction='row'>
                     <Grid item>
-                        <Button disabled={this.isPortalChanged()} variant='contained' color='primary'
-                                onClick={this.updatePortal}>{lang.save}</Button>
+                        <Button disabled={this.isSectionChanged()} variant='contained' color='primary'
+                                onClick={this.updateSection}>{lang.save}</Button>
                     </Grid>
                     <Grid item>
-                        <Button disabled={this.isPortalChanged()} variant='contained' color='secondary'
-                                onClick={this.resetChanges}>{lang.cancel_changes}</Button>
+                        <Button disabled={this.isSectionChanged()} variant='contained' color='secondary'
+                                onClick={this.resetChanges}>{lang.undo_changes}</Button>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={4}>
@@ -100,7 +100,7 @@ class PortalView extends Component {
                                       control={
                                           <Switch id='active'
                                                   label={lang.active}
-                                                  checked={portal.active || false}
+                                                  checked={section.active || false}
                                                   onChange={i => this.onChange('active', i.target.checked)}
                                           />
                                       }
@@ -108,9 +108,9 @@ class PortalView extends Component {
                 </Grid>
 
                 <Grid item container direction='column' spacing={8}>
-                    <FormHelperText>Sekcje</FormHelperText>
+                    <FormHelperText>Content itemy</FormHelperText>
 
-                    <PortalSectionsView sections={portal.sections} onSectionOrderChanged={this.onSectionOrderChanged}/>
+                    <SectionContentItemsView contentItems={section.data} onContentItemOrderChanged={this.onContentItemOrderChanged}/>
                 </Grid>
             </Grid>
         );

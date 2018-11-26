@@ -41,6 +41,17 @@ class YogaApiService {
         })
     }
 
+    static getSection(id) {
+        const path = `/api/sections/${id}`;
+
+        return new Promise((resolve, reject) => {
+            new Request(this.url + path).withMethod('get')
+                .perform()
+                .then(res => resolve(res.data))
+                .catch(err => reject(err))
+        })
+    }
+
     static getLogs() {
         const path = '/api/logs';
 
